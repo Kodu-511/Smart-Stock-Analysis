@@ -112,5 +112,33 @@ void readstocknames(fstream& fin, string stocknames[], int numstocks) {
 	fin.seekg(0);
 }
 
+const int MAX_DAYS = 365;
+const int MAX_STOCKS = 50;
+void readstockprices(fstream& fin, double prices[MAX_DAYS][MAX_STOCKS], int numdays,int numstocks){
+    for (int i = 0; i < MAX_DAYS; i++) {
+        for (int j = 0; j < MAX_STOCKS; j++) {
+            prices[i][j] = -1;
+        }
+    }
 
-void readstockprices(fstream& fin, double prices[][],
+    char ch;
+    double price;
+    while (fin.get(ch)) {
+		if (ch == '\n') {  //skips first line as they are headings
+			break;
+		}
+    }
+    for(int x=0;x<numstocks;x++){
+        while(fin.get(ch)){
+            if(ch==' '){ //skips first word in each row
+                break;
+            }
+        }
+        for(int y=0;y<numdays;y++){
+            fin>>price;
+            prices[y][x]=price;
+        }
+    }
+    fin.clear();
+    fin.seekg(0);
+}
