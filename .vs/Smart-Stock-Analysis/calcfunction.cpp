@@ -46,7 +46,7 @@ int profitdays(double price[], int numdays){
 	
 	//comparing current day to previous day to see if it profit
 	
-	if(numdays == 0 or numdays ==1 ){
+	if(numdays == 0 || numdays ==1 ){
 		dayprofit = 0;//no day can profit if the data is only for a day or zero days
 	}
 	else{
@@ -70,7 +70,7 @@ int lossdays(double price[], int numdays){
 	
 	//comparing current day to previous day to see if it profit
 	
-	if(numdays == 0 or numdays ==1 ){
+	if(numdays == 0 || numdays ==1 ){
 		dayloss = 0;//no day can loss if the data is only for a day or zero days
 	}
 	else{
@@ -144,14 +144,15 @@ string BestStock(string stockNames[], double pricestocks[][MAXDAYS],int numStock
 	
 	string best = stockNames[0];//initially set first stock as best
 	double bestperc,currentperc;
-	double price1[numDays];
+	int const size = numDays;
+	double price1[size];
 	for(int x=0;x<numDays;x++){//making bestperc initially set to first stock	
 		price1[x] = pricestocks[0][x];
 	}
 	bestperc = profitloss(price1, numDays);//initially setting first stock to be the worst
 		
 	for(int i=1; i<numStocks; i++){
-		double price2[numDays];
+		double price2[size];
 		for(int x=0;x<numDays;x++){
 			price2[x] = pricestocks[i][x];	
 		}
@@ -175,14 +176,15 @@ string WorstStock(string stockNames[], double pricestocks[][MAXDAYS],int numStoc
 	
 	string worst = stockNames[0];//initially set first stock as worst
 	double worstperc,currentperc;
-	double price1[numDays];
+	int const size = numDays;
+	double price1[size];
 	for(int x=0;x<numDays;x++){//filling up price1 array with first stock		
 		price1[x] = pricestocks[0][x];	
 	}
 	worstperc = profitloss(price1, numDays);//initially setting first stock to be the worst
 		
 	for(int i=1; i<numStocks; i++){
-		double price2[numDays];
+		double price2[size];
 		for(int x=0;x<numDays;x++){
 			price2[x] = pricestocks[i][x];
 			
