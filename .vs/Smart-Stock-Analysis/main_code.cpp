@@ -3,6 +3,7 @@
 #include<string>
 using namespace std;
 
+
 void welcome_message() {
 	cout << "Welcome!" << endl;
 	cout << "This project demonstrates basic programming concepts in C++."
@@ -87,7 +88,10 @@ int countdaysinfile(fstream& fin) {
 	return counter;
 }
 
-void readstocknames(fstream& fin, string stocknames[], int numstocks) {
+const int MAX_DAYS = 365;
+const int MAX_STOCKS = 50;
+
+void readstocknames(fstream& fin, string (&stocknames)[MAX_STOCKS], int numstocks) {
 	char ch;
 	string temp = "";
 	int counter = 0;
@@ -112,9 +116,7 @@ void readstocknames(fstream& fin, string stocknames[], int numstocks) {
 	fin.seekg(0);
 }
 
-const int MAX_DAYS = 365;
-const int MAX_STOCKS = 50;
-void readstockprices(fstream& fin, double prices[MAX_DAYS][MAX_STOCKS], int numdays,int numstocks){
+void readstockprices(fstream& fin, double (&prices)[MAX_DAYS][MAX_STOCKS], int numdays,int numstocks){
     for (int i = 0; i < MAX_DAYS; i++) {
         for (int j = 0; j < MAX_STOCKS; j++) {
             prices[i][j] = -1;
@@ -141,4 +143,21 @@ void readstockprices(fstream& fin, double prices[MAX_DAYS][MAX_STOCKS], int numd
     }
     fin.clear();
     fin.seekg(0);
+}
+
+void displayalldata(string stocknames[MAX_STOCKS], double prices[MAX_DAYS][MAX_STOCKS], int numdays, int numstocks){
+    cout<<"Stocks: ";
+    for(int x = 0; x<numstocks;x++){
+        cout<<"  "<<stocknames[x]; //header line
+    }
+    cout<<endl;
+    for(int x=0;x<numdays;x++){
+        cout<<"Day"<<x+1<<":";
+        for(int y = 0;y<numstocks;y++){
+            cout<<"  "<<prices[x][y];
+        }
+        cout<<endl;
+
+    }
+
 }
